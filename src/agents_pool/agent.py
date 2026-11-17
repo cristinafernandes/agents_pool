@@ -1,4 +1,4 @@
-from agents import Agent
+from agents import Agent, ModelSettings
 
 from agents_pool.tools import run_python_script_tool, send_email_tool
 
@@ -16,6 +16,7 @@ main_agent = Agent(
         "- summarise_text: summarise a piece of text.\n"
         "Pick the tool that matches the request, then report the result."
     ),
+    model_settings=ModelSettings(tool_choice="required"),
     tools=[
         run_python_script_tool,
         send_email_tool,

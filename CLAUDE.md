@@ -24,7 +24,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture
 
 - `src/agents_pool/tools.py`: `run_python_script` and `send_email` are plain functions (unit-tested directly) wrapped with `function_tool`. Email uses `smtplib` with STARTTLS; config comes from the SMTP env vars in `.env.example`.
-- `src/agents_pool/agent.py`: `main_agent` holds three tools. Summarising is done by a separate `summariser_agent`, exposed with `as_tool("summarise_text")`.
+- `src/agents_pool/agent.py`: `main_agent` holds three tools. Summarising is done by a separate `summariser_agent`, exposed with `as_tool("summarise_text")`. `tool_choice="required"` stops the model from answering by itself (without it, it skipped `summarise_text` about 1 run in 4); `reset_tool_choice` (default True) frees it to give a final answer after the tool call.
 - `src/agents_pool/cli.py`: the one-shot entry point, which uses `Runner.run_sync`.
 - Tool-selection tests read the tools that were called from `result.new_items` (`ToolCallItem.raw_item.name`) and mock SMTP.
 
