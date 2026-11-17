@@ -1,0 +1,22 @@
+[project]
+name = "agents-pool"
+version = "0.1.0"
+description = "An agent that picks between running a Python script, sending an email and summarising text"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "openai-agents>=0.24.0",
+    "python-dotenv>=1.2.4",
+]
+
+[project.scripts]
+agents-pool = "agents_pool.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.8.0,<0.9"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
